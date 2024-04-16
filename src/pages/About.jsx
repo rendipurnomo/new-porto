@@ -1,18 +1,35 @@
-import Helmet from '@/components/Helmet'
-import {WavyBackground} from '@/components/ui/wavy-bg'
+
+import { useRef } from "react";
+import { useScroll, useTransform } from "framer-motion";
+import {GoogleGeminiEffect} from '@/components/ui/google-gemini'
 
 const About = () => {
+    const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+ 
+  const pathLengthFirst = useTransform(scrollYProgress, [0, 0.8], [0.2, 1.2]);
+  const pathLengthSecond = useTransform(scrollYProgress, [0, 0.8], [0.15, 1.2]);
+  const pathLengthThird = useTransform(scrollYProgress, [0, 0.8], [0.1, 1.2]);
+  const pathLengthFourth = useTransform(scrollYProgress, [0, 0.8], [0.05, 1.2]);
+  const pathLengthFifth = useTransform(scrollYProgress, [0, 0.8], [0, 1.2]);
   return (
-    <Helmet>
-      <WavyBackground className="max-w-4xl mx-auto pb-40">
-      <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
-        Quote of the day
-      </p>
-      <p className="text-base md:text-lg mt-4 text-white font-normal inter-var text-center">
-        Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma which is living with the results of other people's thinking." - Steve Jobs
-      </p>
-    </WavyBackground>
-    </Helmet>
+   <div
+      className="h-[400vh] bg-black w-full dark:border dark:border-white/[0.1] rounded-md relative pt-40 overflow-clip"
+      ref={ref}
+    >
+      <GoogleGeminiEffect
+        pathLengths={[
+          pathLengthFirst,
+          pathLengthSecond,
+          pathLengthThird,
+          pathLengthFourth,
+          pathLengthFifth,
+        ]}
+      />
+    </div>
   )
 }
 
