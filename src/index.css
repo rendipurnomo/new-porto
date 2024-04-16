@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-mplus bg-gray-950 text-white
+  }
+  html{
+    @apply scroll-smooth snap-mandatory cursor-crosshair
+  }
+  section {
+    @apply h-screen scroll-smooth snap-center px-4
+  }
+}
